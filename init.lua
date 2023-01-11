@@ -124,6 +124,8 @@ vim.o.termguicolors = true
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+vim.o.relativenumber = true
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -422,6 +424,25 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- My custom keymappings
+vim.keymap.set('i', 'jj', '<Esc>', {})
+-- save and quit without your pinkies
+vim.keymap.set('', '<leader>w', ':w<cr>', {})
+vim.keymap.set('', '<leader>q', ':q<cr>', {})
+--quick find and replace
+vim.keymap.set('', ';;', ':%s:::g<Left><Left><Left>', {})
+-- switch tabs easily
+vim.keymap.set('', '<leader>1', '1gt', {})
+vim.keymap.set('', '<leader>2', '2gt', {})
+vim.keymap.set('', '<leader>4', '4gt', {})
+vim.keymap.set('', '<leader>5', '5gt', {})
+vim.keymap.set('', '<leader>6', '6gt', {})
+vim.keymap.set('', '<leader>7', '7gt', {})
+vim.keymap.set('', '<leader>8', '8gt', {})
+vim.keymap.set('', '<leader>9', '9gt', {})
+vim.keymap.set('', '<leader>9', '9gt', {})
+vim.keymap.set('', '<leader>0', ':tablast<cr>', {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
