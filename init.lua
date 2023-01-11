@@ -114,7 +114,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 200
 vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
@@ -431,7 +431,7 @@ vim.keymap.set('i', 'jj', '<Esc>', {})
 vim.keymap.set('', '<leader>w', ':w<cr>', {})
 vim.keymap.set('', '<leader>q', ':q<cr>', {})
 --quick find and replace
-vim.keymap.set('', ';;', ':%s:::g<Left><Left><Left>', {})
+vim.keymap.set('', '<leader>;', ':%s:::g<Left><Left><Left>', {})
 -- switch tabs easily
 vim.keymap.set('', '<leader>1', '1gt', {})
 vim.keymap.set('', '<leader>2', '2gt', {})
