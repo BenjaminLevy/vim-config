@@ -10,7 +10,6 @@ end
 require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
-
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -19,11 +18,17 @@ require('packer').startup(function(use)
       'williamboman/mason-lspconfig.nvim',
 
       -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
+      {'j-hui/fidget.nvim', tag = 'legacy'},
 
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
+  }
+
+  use {
+        'barrett-ruth/live-server.nvim',
+        cmd = { 'LiveServerStart', 'LiveServerStop' },
+        config = true
   }
 
   use {
@@ -60,10 +65,11 @@ require('packer').startup(function(use)
 
   use 'tpope/vim-surround' -- Easily surround text with quotes, parents, HTML tags
 
+  use 'windwp/nvim-ts-autotag'
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' } }
-
-  -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
+-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
   -- NERD commenter
@@ -136,7 +142,7 @@ vim.o.updatetime = 200
 vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
-vim.o.termguicolors = true
+vim.o.termguicolors = false
 -- vim.cmd [[colorscheme onedark]]
 
 -- Set completeopt to have a better completion experience
@@ -186,9 +192,9 @@ require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
+require('ibl').setup {
+  indent = { char = '┊'},
+  -- show_trailing_blankline_indent = false,
 }
 
 -- Gitsigns
@@ -240,8 +246,9 @@ vim.keymap.set('n', '<leader>fd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', "yaml" },
-
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim', 'javascript', "yaml", "html", "css" },
+  -- Automatically complete HTML tags. See: https://github.com/windwp/nvim-ts-autotag
+  autotag = { enable = true },
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
@@ -444,7 +451,7 @@ cmp.setup {
 }
 
 -- My custom keymappings
-vim.keymap.set('i', 'jj', '<Esc>', {})
+vim.keymap.set('i', 'jk', '<Esc>', {})
 -- save and quit without your pinkies
 vim.keymap.set('', '<leader>w', ':w<cr>', {})
 vim.keymap.set('', '<leader>q', ':q<cr>', {})
